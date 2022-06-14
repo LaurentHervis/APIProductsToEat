@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -43,6 +44,18 @@ class Product
      * @ORM\ManyToMany(targetEntity=Color::class, inversedBy="products")
      */
     private $colors;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -137,5 +150,15 @@ class Product
         $this->colors->removeElement($color);
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
     }
 }
