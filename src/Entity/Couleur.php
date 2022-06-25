@@ -2,17 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ColorRepository;
+use App\Repository\CouleurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ColorRepository::class)
+ * @ORM\Entity(repositoryClass=CouleurRepository::class)
  */
-class Color
+class Couleur
 {
     /**
      * @ORM\Id
@@ -27,16 +26,12 @@ class Color
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=15, nullable=true)
-     * @Assert\CssColor(
-     *     formats = Assert\CssColor::HEX_LONG,
-     *     message = "The accent color must be a 6-character hexadecimal color."
-     * )
+     * @ORM\Column(type="string", length=7, nullable=true)
      */
     private $codeHexa;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="colors")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="couleurs")
      */
     private $products;
 
@@ -44,13 +39,13 @@ class Color
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
-    private $createdAt;
+    private $CreatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="update")
      */
-    private $updatedAt;
+    private $UpdatedAt;
 
     public function __construct()
     {
@@ -98,7 +93,7 @@ class Color
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->addColor($this);
+            $product->addCouleur($this);
         }
 
         return $this;
@@ -107,7 +102,7 @@ class Color
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
-            $product->removeColor($this);
+            $product->removeCouleur($this);
         }
 
         return $this;
@@ -115,11 +110,11 @@ class Color
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->CreatedAt;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->UpdatedAt;
     }
 }

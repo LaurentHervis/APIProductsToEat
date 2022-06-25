@@ -41,11 +41,6 @@ class Product
     private $months;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Color::class, inversedBy="products")
-     */
-    private $colors;
-
-    /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
@@ -57,10 +52,15 @@ class Product
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Couleur::class, inversedBy="products")
+     */
+    private $couleurs;
+
     public function __construct()
     {
         $this->months = new ArrayCollection();
-        $this->colors = new ArrayCollection();
+        $this->couleurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,30 +128,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Color>
-     */
-    public function getColors(): Collection
-    {
-        return $this->colors;
-    }
-
-    public function addColor(Color $color): self
-    {
-        if (!$this->colors->contains($color)) {
-            $this->colors[] = $color;
-        }
-
-        return $this;
-    }
-
-    public function removeColor(Color $color): self
-    {
-        $this->colors->removeElement($color);
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -160,5 +136,29 @@ class Product
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return Collection<int, Couleur>
+     */
+    public function getCouleurs(): Collection
+    {
+        return $this->couleurs;
+    }
+
+    public function addCouleur(Couleur $couleur): self
+    {
+        if (!$this->couleurs->contains($couleur)) {
+            $this->couleurs[] = $couleur;
+        }
+
+        return $this;
+    }
+
+    public function removeCouleur(Couleur $couleur): self
+    {
+        $this->couleurs->removeElement($couleur);
+
+        return $this;
     }
 }
