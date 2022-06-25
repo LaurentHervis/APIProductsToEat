@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Create new Product</h1>
 
-    {{ include('back_office/product/_form.html.twig') }}
+    {{ include('product/_form.html.twig') }}
 
-    <a href="{{ path('app_back_office_product_index') }}">back to list</a>
+    <a href="{{ path('back_office_product_index') }}">back to list</a>
 {% endblock %}

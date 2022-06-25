@@ -1,3 +1,13 @@
 body{
-  background-color: brown;
+  
+}
+
+.navbar{
+  width: 200px;
+  height: 1200px;
+  background-color: rgb(82, 89, 185);
+}
+
+.nav-link{
+  color: white;
 }

@@ -16,17 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="app_back_office_product_index", methods={"GET"})
+     * @Route("/", name="back_office_product_index", methods={"GET"})
      */
     public function index(ProductRepository $productRepository): Response
     {
-        return $this->render('back_office/product/index.html.twig', [
+        return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_back_office_product_new", methods={"GET", "POST"})
+     * @Route("/new", name="back_office_product_new", methods={"GET", "POST"})
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -39,27 +39,27 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->add($product, true);
             // dd($form);
-            return $this->redirectToRoute('app_back_office_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_office_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back_office/product/new.html.twig', [
+        return $this->renderForm('product/new.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_back_office_product_show", methods={"GET"})
+     * @Route("/{id}", name="back_office_product_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {
-        return $this->render('back_office/product/show.html.twig', [
+        return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="app_back_office_product_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="back_office_product_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {
@@ -69,17 +69,17 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_back_office_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_office_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back_office/product/edit.html.twig', [
+        return $this->renderForm('product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_back_office_product_delete", methods={"POST"})
+     * @Route("/{id}", name="back_office_product_delete", methods={"POST"})
      */
     public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
     {
@@ -87,6 +87,6 @@ class ProductController extends AbstractController
             $productRepository->remove($product, true);
         }
 
-        return $this->redirectToRoute('app_back_office_product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('back_office_product_index', [], Response::HTTP_SEE_OTHER);
     }
 }

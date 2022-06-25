@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MonthController extends AbstractController
 {
     /**
-     * @Route("/", name="app_month_index", methods={"GET"})
+     * @Route("/", name="back_office_month_index", methods={"GET"})
      */
     public function index(MonthRepository $monthRepository): Response
     {
@@ -26,7 +26,7 @@ class MonthController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_month_new", methods={"GET", "POST"})
+     * @Route("/new", name="back_office_month_new", methods={"GET", "POST"})
      */
     public function new(Request $request, MonthRepository $monthRepository): Response
     {
@@ -37,7 +37,7 @@ class MonthController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $monthRepository->add($month, true);
 
-            return $this->redirectToRoute('app_month_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_office_month_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('month/new.html.twig', [
@@ -47,7 +47,7 @@ class MonthController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_month_show", methods={"GET"})
+     * @Route("/{id}", name="back_office_month_show", methods={"GET"})
      */
     public function show(Month $month): Response
     {
@@ -57,7 +57,7 @@ class MonthController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_month_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="back_office_month_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Month $month, MonthRepository $monthRepository): Response
     {
@@ -67,7 +67,7 @@ class MonthController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $monthRepository->add($month, true);
 
-            return $this->redirectToRoute('app_month_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_office_month_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('month/edit.html.twig', [
@@ -77,7 +77,7 @@ class MonthController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_month_delete", methods={"POST"})
+     * @Route("/{id}", name="back_office_month_delete", methods={"POST"})
      */
     public function delete(Request $request, Month $month, MonthRepository $monthRepository): Response
     {
@@ -85,6 +85,6 @@ class MonthController extends AbstractController
             $monthRepository->remove($month, true);
         }
 
-        return $this->redirectToRoute('app_month_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('back_office_month_index', [], Response::HTTP_SEE_OTHER);
     }
 }

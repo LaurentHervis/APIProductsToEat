@@ -16,17 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="app_back_office_category_index", methods={"GET"})
+     * @Route("/", name="back_office_category_index", methods={"GET"})
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('back_office/category/index.html.twig', [
+        return $this->render('category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_back_office_category_new", methods={"GET", "POST"})
+     * @Route("/new", name="back_office_category_new", methods={"GET", "POST"})
      */
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
@@ -37,27 +37,27 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepository->add($category, true);
 
-            return $this->redirectToRoute('app_back_office_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_office_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back_office/category/new.html.twig', [
+        return $this->renderForm('category/new.html.twig', [
             'category' => $category,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_back_office_category_show", methods={"GET"})
+     * @Route("/{id}", name="back_office_category_show", methods={"GET"})
      */
     public function show(Category $category): Response
     {
-        return $this->render('back_office/category/show.html.twig', [
+        return $this->render('category/show.html.twig', [
             'category' => $category,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="app_back_office_category_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="back_office_category_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
@@ -67,17 +67,17 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepository->add($category, true);
 
-            return $this->redirectToRoute('app_back_office_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_office_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back_office/category/edit.html.twig', [
+        return $this->renderForm('category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="app_back_office_category_delete", methods={"POST"})
+     * @Route("/{id}", name="back_office_category_delete", methods={"POST"})
      */
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
@@ -85,6 +85,6 @@ class CategoryController extends AbstractController
             $categoryRepository->remove($category, true);
         }
 
-        return $this->redirectToRoute('app_back_office_category_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('back_office_category_index', [], Response::HTTP_SEE_OTHER);
     }
 }

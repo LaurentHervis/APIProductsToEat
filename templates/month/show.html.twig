@@ -22,9 +22,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_month_index') }}">back to list</a>
+    <a href="{{ path('back_office_month_index') }}">back to list</a>
 
-    <a href="{{ path('app_month_edit', {'id': month.id}) }}">edit</a>
+    <a href="{{ path('back_office_month_edit', {'id': month.id}) }}">edit</a>
 
     {{ include('month/_delete_form.html.twig') }}
 {% endblock %}
