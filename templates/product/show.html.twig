@@ -30,6 +30,8 @@
         </tbody>
     </table>
 
+    {{ include('_calendar.html.twig') }}
+
     <a href="{{ path('back_office_product_index') }}">back to list</a>
 
     <a href="{{ path('back_office_product_edit', {'id': product.id}) }}">edit</a>

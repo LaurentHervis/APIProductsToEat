@@ -9,9 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>AveragePrice</th>
-                <th>CreatedAt</th>
+                <th>Nom</th>
+                <th>Prix Moyen (kg)</th>
+                <th>Catégorie</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
@@ -22,7 +22,7 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.averagePrice }}</td>
-                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product.category.name }}</td>
                 <td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('back_office_product_show', {'id': product.id}) }}">show</a>

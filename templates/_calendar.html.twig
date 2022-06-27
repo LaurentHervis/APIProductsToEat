@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+    {% for month in months %}
+      <th scope="col">{{ month.name }}</th>
+    {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    {% for m in 1..12 %}
+    {% set result = '-' %}
+      {% for month in product.months %}
+        {% if month.code == m %}{% set result = 'X' %}{% endif %}
+      {% endfor %}
+      <td>{{ result }}</td>
+    {% endfor %}
+    </tr>
+  </tbody>
+  </table>
+</div>

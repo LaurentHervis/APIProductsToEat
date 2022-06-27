@@ -4,6 +4,7 @@ namespace App\Controller\BackOffice;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\MonthRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +19,14 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="back_office_product_index", methods={"GET"})
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, MonthRepository $monthRepository): Response
     {
+        
+        // dd($productRepository->findAll());
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+            'months' => $monthRepository->findAll(),
         ]);
     }
 
@@ -51,10 +56,13 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}", name="back_office_product_show", methods={"GET"})
      */
-    public function show(Product $product): Response
+    public function show(Product $product, MonthRepository $monthRepository): Response
     {
+        
+        // dd($product->getMonths(7));
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'months' => $monthRepository->findAll(),
         ]);
     }
 
