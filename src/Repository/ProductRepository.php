@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Month;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,18 @@ class ProductRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findProductsOfMonth(Month $month)
+    {
+
+        return $this->createQueryBuilder('p')
+           ->innerJoin('p.months', 'm')
+           ->where('m.id = :month')
+           ->setParameter('month', $month)
+           ->getQuery()
+           ->getResult()
+       ;
     }
 
 //    /**

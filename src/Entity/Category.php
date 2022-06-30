@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -22,6 +23,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $name;
 

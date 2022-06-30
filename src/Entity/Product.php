@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -17,26 +18,31 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $averagePrice;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=Month::class, inversedBy="products")
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $months;
 
@@ -54,6 +60,7 @@ class Product
 
     /**
      * @ORM\ManyToMany(targetEntity=Couleur::class, inversedBy="products")
+     * @Groups({"products_get_collection", "product_get_item"})
      */
     private $couleurs;
 
